@@ -3,5 +3,4 @@ language: ruby
 services:
   - docker
 
-script: |
-  git log master..HEAD
+script: ./scripts/ci_pr
