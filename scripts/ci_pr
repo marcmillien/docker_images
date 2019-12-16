@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -u
+set -e
+
+## Test docker images
+git log --pretty='' --name-only master..HEAD \
+  | grep '/' \
+  | grep -v 'scripts/' \
+  | sed -e 's;^\([^/]*\)/.*;\1;g' \
+  | sort -u \
+  | while read IMAGE
+  do
+    make build repository=marcmillien image=${IMAGE}
+    make test repository=marcmillien image=${IMAGE}
+  done
+
+## Run rubocop
+rubocop
