@@ -30,3 +30,4 @@ sh: ## Get a shell on given image
 .PHONY: test
 test: ## Run tests on given image
 	REPOSITORY=$(repository) IMAGE=$(image) rspec -c $(image)/spec
+	rubocop $(image)
