@@ -4,7 +4,7 @@ set -u
 set -e
 
 ## Test docker images
-git log --pretty='' --name-only master..HEAD \
+git log --pretty='' --name-only master.. \
   | grep '/' \
   | grep -v 'scripts/' \
   | sed -e 's;^\([^/]*\)/.*;\1;g' \
@@ -14,6 +14,3 @@ git log --pretty='' --name-only master..HEAD \
     make build repository=marcmillien image=${IMAGE}
     make test repository=marcmillien image=${IMAGE}
   done
-
-## Run rubocop
-rubocop
