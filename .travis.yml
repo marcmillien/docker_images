@@ -1,6 +1,11 @@
 language: ruby
 
+rvm:
+  - 2.6
+
 services:
   - docker
+
+install: bundle
 
 script: ./scripts/ci_pr

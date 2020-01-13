@@ -1,4 +1,4 @@
-image?=tflint
+image?=example
 repository?=marcmillien
 tag?=latest
 
@@ -12,22 +12,22 @@ help:
 	@grep -E '^[a-zA-Z_-]+\?=.*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = "\?="}; {printf "\033[36m%-20s\033[0m default: %s\n", $$1, $$2}'
 
 .PHONY: build
-build: ## Build the given image
+build: ## Build the given image (options: repository, image, tag)
 	docker build -t $(repository)/$(image):$(tag) $(image)
 
 .PHONY: new
-new: ## Create a new image
+new: ## Create a new image  (options: image)
 	cp -r example $(image)
 
 .PHONY: push
-push: ## Push the given image
+push: ## Push the given image (options: repository, image, tag)
 	docker push $(repository)/$(image):$(tag)
 
 .PHONY: sh
-sh: ## Get a shell on given image
+sh: ## Get a shell on given image (options: repository, image, tag)
 	docker run --rm -it --entrypoint /bin/bash $(repository)/$(image):$(tag)
 
 .PHONY: test
-test: ## Run tests on given image
+test: ## Run tests on given image (options: repository, image)
 	REPOSITORY=$(repository) IMAGE=$(image) rspec -c $(image)/spec
-	rubocop $(image)
+	rubocop

@@ -16,7 +16,7 @@ describe 'Dockerfile' do
         'Entrypoint' => ['/bin/sh']
   end
 
-  describe command('echo "ok"') do
+  describe command('ngrok --version') do
     its(:exit_status) { should eq 0 }
   end
 end
